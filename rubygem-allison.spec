@@ -28,30 +28,35 @@ Documents, RDoc & RI documentation for %{name}.
 %setup -q
 
 %build
-%gem_build -f '(cache|contrib)/'
+mkdir -p .%{ruby_gemdir}
+gem install -V --local --install-dir .%{ruby_gemdir} \
+               --force --rdoc %{SOURCE0}
 
 %install
-%gem_install
+mkdir -p %{buildroot}%{ruby_gemdir}
+mkdir -p %{buildroot}%{_bindir}
+cp -rf .%{ruby_gemdir}/* %{buildroot}%{ruby_gemdir}
+ln -s %{buildroot}%{ruby_gemdir}/gems/%{rbname}-%{version}/bin/allison %{buildroot}%{_bindir}/allison
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %{_bindir}/allison
 %dir %{ruby_gemdir}/gems/%{rbname}-%{version}
-%dir %{ruby_gemdir}/gems/%{rbname}-%{version}/bin
-%{ruby_gemdir}/gems/%{rbname}-%{version}/bin/allison
-%dir %{ruby_gemdir}/gems/%{rbname}-%{version}/cache
-%{ruby_gemdir}/gems/%{rbname}-%{version}/cache/*
-%dir %{ruby_gemdir}/gems/%{rbname}-%{version}/contrib
-%{ruby_gemdir}/gems/%{rbname}-%{version}/contrib/*.rb
-%{ruby_gemdir}/gems/%{rbname}-%{version}/contrib/Rakefile
-%dir %{ruby_gemdir}/gems/%{rbname}-%{version}/lib
-%{ruby_gemdir}/gems/%{rbname}-%{version}/lib/*.css
-%{ruby_gemdir}/gems/%{rbname}-%{version}/lib/*.js
-%{ruby_gemdir}/gems/%{rbname}-%{version}/lib/*.rb
+%{ruby_gemdir}/bin/allison
+%{ruby_gemdir}/cache/*
+%{ruby_gemdir}/gems/%{rbname}-%{version}/*
 %{ruby_gemdir}/specifications/%{rbname}-%{version}.gemspec
 
 %files doc
 %doc %{ruby_gemdir}/doc/%{rbname}-%{version}
 
+
+
+%changelog
+* Tue Mar 15 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.0.3-1
++ Revision: 645108
+- imported package rubygem-allison
+
+
+* Tue Mar 15 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.0.3-1
+- Initial package
