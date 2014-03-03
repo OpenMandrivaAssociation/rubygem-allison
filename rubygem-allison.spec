@@ -5,7 +5,7 @@ Summary:	A modern, pretty RDoc template
 Name:		rubygem-%{rbname}
 
 Version:	2.0.3
-Release:	1
+Release:	2
 Group:		Development/Ruby
 License:	GPLv2+ or Ruby
 URL:		http://blog.evanweaver.com/pages/code#allison
@@ -36,7 +36,9 @@ gem install -V --local --install-dir .%{ruby_gemdir} \
 mkdir -p %{buildroot}%{ruby_gemdir}
 mkdir -p %{buildroot}%{_bindir}
 cp -rf .%{ruby_gemdir}/* %{buildroot}%{ruby_gemdir}
-ln -s %{buildroot}%{ruby_gemdir}/gems/%{rbname}-%{version}/bin/allison %{buildroot}%{_bindir}/allison
+pushd %{buildroot}
+ln -s ../../%{ruby_gemdir}/gems/%{rbname}-%{version}/bin/allison ./%{_bindir}/allison
+popd
 
 
 %files
@@ -49,14 +51,3 @@ ln -s %{buildroot}%{ruby_gemdir}/gems/%{rbname}-%{version}/bin/allison %{buildro
 
 %files doc
 %doc %{ruby_gemdir}/doc/%{rbname}-%{version}
-
-
-
-%changelog
-* Tue Mar 15 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.0.3-1
-+ Revision: 645108
-- imported package rubygem-allison
-
-
-* Tue Mar 15 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.0.3-1
-- Initial package
