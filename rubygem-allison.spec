@@ -4,7 +4,7 @@
 Summary:	A modern, pretty RDoc template
 Name:		rubygem-%{rbname}
 Version:	2.0.3
-Release:	3
+Release:	4
 Group:		Development/Ruby
 License:	GPLv2+ or Ruby
 URL:		http://blog.evanweaver.com/pages/code#allison
