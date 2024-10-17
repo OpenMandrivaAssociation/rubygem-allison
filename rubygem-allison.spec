@@ -7,7 +7,7 @@ Version:	2.0.3
 Release:	4
 Group:		Development/Ruby
 License:	GPLv2+ or Ruby
-URL:		http://blog.evanweaver.com/pages/code#allison
+URL:		https://blog.evanweaver.com/pages/code#allison
 Source0:	http://rubygems.org/gems/%{rbname}-%{version}.gem
 BuildRequires:	rubygems 
 BuildArch:	noarch
